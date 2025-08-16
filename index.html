@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SysNitorS TNKC Team - Go Kart Racing</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #ff0000;
+            --primary-dark: #cc0000;
+            --primary-light: #ff6666;
+            --secondary: #ffffff;
+            --secondary-dark: #f2f2f2;
+            --dark: #1a1a1a;
+            --dark-gray: #2d2d2d;
+            --medium-gray: #424242;
+            --light-gray: #e0e0e0;
+            --light: #ffffff;
+            --success: #4caf50;
+            --warning: #ff9800;
+            --danger: #f44336;
+            --instagram: #E1306C;
+            --linkedin: #0077B5;
+            --twitter: #1DA1F2;
+            --youtube: #FF0000;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--dark), var(--dark-gray));
+            color: var(--light);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header Styles */
+        header {
+            background: rgba(0, 0, 0, 0.9);
+            padding: 3rem 0 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            border-bottom: 4px solid var(--primary);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgyNTUsMCwwLDAuMDUpIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI3BhdHRlcm4pIi8+PC9zdmc+');
+            z-index: 0;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        h1, h2, h3, h4 {
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+
+        h1 {
+            font-size: 3rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--light-gray);
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            flex: 1;
+        }
+
+        /* Navigation */
+        .main-nav {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 0, 0, 0.2);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--light);
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            color: var(--primary);
+            margin-right: 0.5rem;
+            font-size: 1.8rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+            transition: all 0.3s ease;
+            border-radius: 4px;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            background: rgba(255, 0, 0, 0.2);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--light);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Team Structure */
+        .team-structure {
+            margin: 3rem 0;
+        }
+
+        .team-section {
+            background: rgba(30, 30, 30, 0.8);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .team-section:hover {
+            border-color: rgba(255, 0, 0, 0.3);
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .team-section h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid var(--primary);
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .team-section h2 i {
+            margin-right: 0.8rem;
+            font-size: 1.5rem;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.8rem;
+        }
+
+        /* Team Cards */
+        .team-card, .leader-card {
+            background: linear-gradient(145deg, #1e1e1e, #252525);
+            border-radius: 10px;
+            padding: 1.8rem 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 0, 0, 0.1);
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .team-card::before, .leader-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 0, 0, 0.1), transparent);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .team-card:hover::before, .leader-card:hover::before {
+            opacity: 1;
+        }
+
+        .team-card:hover, .leader-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 0, 0, 0.3);
+        }
+
+        .member-photo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary);
+            margin-bottom: 1rem;
+            background-color: var(--dark-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .member-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .member-info {
+            width: 100%;
+        }
+
+        .team-card h3, .leader-card h3 {
+            color: var(--light);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .team-card h3::after, .leader-card h3::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 3px;
+        }
+
+        .team-card p, .leader-card p {
+            color: var(--light-gray);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .role, .position {
+            color: var(--primary-light);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+
+        /* Leader Cards */
+        .leader-card {
+            background: linear-gradient(145deg, #252525, #1a1a1a);
+            border: 1px solid rgba(255, 0, 0, 0.2);
+        }
+
+        .leader-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--primary);
+        }
+
+        .leader-card .position {
+            color: var(--secondary);
+        }
+
+        /* Pilot Cards */
+        .pilot-card {
+            background: linear-gradient(145deg, #1a1a1a, #121212);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .pilot-card::after {
+            background: var(--secondary);
+        }
+
+        .pilot-card .position {
+            color: var(--secondary);
+        }
+
+        /* Social Links */
+        .social-links {
+            position: absolute;
+            bottom: -60px;
+            left: 0;
+            right: 0;
+            background: rgba(30, 30, 30, 0.95);
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            border-top: 1px solid rgba(255, 0, 0, 0.2);
+        }
+
+        .team-card:hover .social-links, 
+        .leader-card:hover .social-links {
+            bottom: 0;
+        }
+
+        .social-links a {
+            color: var(--light);
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 0, 0, 0.1);
+        }
+
+        .social-links a:hover {
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .instagram:hover {
+            background: var(--instagram);
+            color: white;
+        }
+
+        .linkedin:hover {
+            background: var(--linkedin);
+            color: white;
+        }
+
+        .twitter:hover {
+            background: var(--twitter);
+            color: white;
+        }
+
+        .youtube:hover {
+            background: var(--youtube);
+            color: white;
+        }
+
+        /* Leadership Grid */
+        .leadership {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.8rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+        }
+
+        .modal-content {
+            background: linear-gradient(145deg, #1e1e1e, #252525);
+            margin: 10% auto;
+            padding: 2.5rem;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            position: relative;
+            color: var(--light);
+            border: 1px solid rgba(255, 0, 0, 0.2);
+            animation: modalFadeIn 0.4s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--light-gray);
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+            color: var(--secondary);
+            transform: rotate(90deg);
+        }
+
+        .modal h3 {
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .modal h3 i {
+            margin-right: 0.8rem;
+        }
+
+        .modal-input {
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            border-radius: 6px;
+            background: rgba(30, 30, 30, 0.8);
+            color: var(--light);
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .modal-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.2);
+        }
+
+        .modal-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            width: 100%;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .modal-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.9);
+            text-align: center;
+            padding: 2rem;
+            margin-top: auto;
+            border-top: 1px solid rgba(255, 0, 0, 0.2);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            text-align: left;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--light);
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-logo i {
+            color: var(--primary);
+            margin-right: 0.5rem;
+        }
+
+        .footer-about p {
+            font-size: 0.95rem;
+            color: var(--light-gray);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .footer-social a {
+            color: var(--light);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .footer-social a:hover {
+            transform: translateY(-3px);
+        }
+
+        .footer-social .instagram:hover {
+            background: var(--instagram);
+        }
+
+        .footer-social .linkedin:hover {
+            background: var(--linkedin);
+        }
+
+        .footer-social .twitter:hover {
+            background: var(--twitter);
+        }
+
+        .footer-social .youtube:hover {
+            background: var(--youtube);
+        }
+
+        .footer-links h4, .footer-contact h4 {
+            font-size: 1.2rem;
+            color: var(--light);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: var(--light-gray);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+            padding-left: 5px;
+        }
+
+        .footer-links a i {
+            margin-right: 0.5rem;
+            font-size: 0.8rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            color: var(--light-gray);
+            font-size: 0.95rem;
+        }
+
+        .contact-item i {
+            color: var(--primary);
+            margin-right: 1rem;
+            font-size: 1rem;
+            margin-top: 3px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--light-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .team-grid {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            }
+            
+            .leadership {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: rgba(0, 0, 0, 0.95);
+                flex-direction: column;
+                gap: 0;
+                padding: 2rem 0;
+                transition: all 0.4s ease;
+                z-index: 999;
+                border-top: 1px solid rgba(255, 0, 0, 0.2);
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .nav-links a {
+                width: 100%;
+                text-align: center;
+                padding: 1.2rem;
+                border-bottom: 1px solid rgba(255, 0, 0, 0.1);
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .team-section {
+                padding: 1.5rem;
+            }
+            
+            ..member-photo {
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                object-fit: cover;
+                border: 3px solid var(--primary);
+                margin-bottom: 1rem;
+                background-color: var(--dark-gray);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                overflow: hidden;
+}
+
+.member-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+            }
+            
+            .modal-content {
+                padding: 2rem 1.5rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            header {
+                padding: 2rem 0 1.5rem;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .team-grid, .leadership {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>TEAM SYGNITORS</h1>
+            <p class="subtitle">Engineering Excellence in Go Kart Racing</p>
+        </div>
+    </header>
+    
+    <nav class="main-nav">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-bolt"></i>
+                <span>SysNitorS</span>
+            </div>
+            <div class="nav-links">
+                <a href="https://akash14k19.github.io/SYG-Home/">Home</a>
+                <a href="members.html" class="active">Members</a>
+                <a href="gallery.html">Gallery</a>
+                <a href="achievements.html">Achievements</a>
+                <a href="info.html">Info</a>
+            </div>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <div class="team-structure">
+            <!-- Leadership Section -->
+            <div class="team-section">
+                <h2><i class="fas fa-crown"></i>Team Leadership</h2>
+                <div class="leadership">
+                    <div class="leader-card">
+                        <div class="member-photo">
+                            <img src="sir.jpg" alt="ANANDH">
+                        </div>
+                        <div class="member-info">
+                            <h3>ANANDH</h3>
+                            <p class="position">Faculty Adviser</p>
+                            <div class="social-links">
+                                <a href="#" class="instagram" onclick="showSocialModal('ANANDH', 'Faculty Adviser', 'instagram')"><i class="fab fa-instagram"></i></a>
+                                <a href="#" class="linkedin" onclick="showSocialModal('ANANDH', 'Faculty Adviser', 'linkedin')"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="leader-card">
+                        <div class="member-photo">
+                            <img src="jns.jpg" alt="MICHAEL JONES">
+                        </div>
+                        <div class="member-info">
+                            <h3>MICHAEL JONES</h3>
+                            <p class="position">Faculty Advisor</p>
+                            <div class="social-links">
+                                <a href="#" class="instagram" onclick="showSocialModal('MICHAEL JONES', 'Faculty Advisor', 'instagram')"><i class="fab fa-instagram"></i></a>
+                                <a href="#" class="linkedin" onclick="showSocialModal('MICHAEL JONES', 'Faculty Advisor', 'linkedin')"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="leader-card">
+                        <div class="member-photo">
+                            <img src="masy.jpg" alt="RITHIK MASS">
+                        </div>
+                        <div class="member-info">
+                            <h3>RITHIK MASS</h3>
+                            <p class="position">CAPTAIN</p>
+                            <div class="social-links">
+                                <a href="#" class="instagram" onclick="showSocialModal('RITHIK MASS', 'CAPTAIN', 'instagram')"><i class="fab fa-instagram"></i></a>
+                                <a href="#" class="linkedin" onclick="showSocialModal('RITHIK MASS', 'CAPTAIN', 'linkedin')"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="leader-card">
+                        <div class="member-photo">
+                            <img src="sab.jpg" alt="SABARISHWAR">
+                        </div>
+                        <div class="member-info">
+                            <h3>SABARISHWAR</h3>
+                            <p class="position">VICE CAPTAIN</p>
+                            <div class="social-links">
+                                <a href="#" class="instagram" onclick="showSocialModal('SABARISHWAR', 'VICE CAPTAIN', 'instagram')"><i class="fab fa-instagram"></i></a>
+                                <a href="#" class="linkedin" onclick="showSocialModal('SABARISHWAR', 'VICE CAPTAIN', 'linkedin')"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="leadership">
+                    <div class="leader-card pilot-card">
+                        <div class="member-photo">
+                            <img src="drows.jpg" alt="DAWN HIRUTHAYASAWMY">
+                        </div>
+                        <div class="member-info">
+                            <h3>DAWN HIRUTHAYASAWMY</h3>
+                            <p class="position">PILOT</p>
+                            <div class="social-links">
+                                <a href="#" class="instagram" onclick="showSocialModal('DAWN HIRUTHAYASAWMY', 'PILOT', 'instagram')"><i class="fab fa-instagram"></i></a>
+                                <a href="#" class="linkedin" onclick="showSocialModal('DAWN HIRUTHAYASAWMY', 'PILOT', 'linkedin')"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="leader-card pilot-card">
+                        <div class="member-photo">
+                            <img src="kn.jpg" alt="GURU PRASATH">
+                        </div>
+                        <div class="member-info">
+                            <h3>GURU PRASATH</h3>
+                            <p class="position">CO-PILOT</p>
+                            <div class="social-links">
+                                <a href="#" class="instagram" onclick="showSocialModal('GURU PRASATH', 'CO-PILOT', 'instagram')"><i class="fab fa-instagram"></i></a>
+                                <a href="#" class="linkedin" onclick="showSocialModal('GURU PRASATH', 'CO-PILOT', 'linkedin')"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Design Team Section -->
+            <div class="team-section">
+                <h2><i class="fas fa-drafting-compass"></i>Design Team</h2>
+                <div class="team-grid">
+                    <div class="team-card">
+                        <div class="member-photo">
+                            <img src="WhatsApp Image 2025-05-12 at 20.45.37_965440bb.jpg" alt="AKASH">
+                        </div>
+                        <div class="member-info">
+                            <h3>AKASH</h3>
+                            <p class="role">Head Design Team</p>
+                            <div class="social-links">
+                                <a href="#" class="instagram" onclick="showSocialModal('AKASH', 'Design Team', 'instagram')"><i class="fab fa-instagram"></i></a>
+                                <a href="#" class="linkedin" onclick="showSocialModal('AKASH', 'Design Team', 'linkedin')"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="team-card">
+                        <div class="member-photo">
+                            <img src="tmbi.jpg" alt="PREM NIVAS">
+                        </div>
+                        <div class="member-info">
+                            <h3>PREM NIVAS</h3>
+                            <p class="role">Design Team</p>
+                            <div class="social-links">
+                                <a href="#" class="instagram" onclick="showSocialModal('PREM NIVAS', 'Design Team', 'instagram')"><i class="fab fa-instagram"></i></a>
+                                <a href="#" class="linkedin" onclick="showSocialModal('PREM NIVAS', 'Design Team', 'linkedin')"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Mech & Engine Team Section -->
+            <div class="team-section">
+                <h2><i class="fas fa-cogs"></i>Mech & Engine Team</h2>
+                <div class="team-grid">
+                    <div class="team-card">
+                        <div class="member-photo">
+                            <img src="MARI.jpg" alt="SUDHARSAN">
+                        </div>
+                        <div class="member-info">
+                            <h3>SUDHARSAN</h3>
+                            <p class="role">Head Mech & Engine</p>
+                            <div class="social-links">
+                                <a href="#" class="instagram" onclick="showSocialModal('SUDHARSAN', 'Mech & Engine', 'instagram')"><i class="fab fa-instagram"></i></a>
+                                <a href="#" class="linkedin" onclick="showSocialModal('SUDHARSAN', 'Mech & Engine', 'linkedin')"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="team-card">
+                        <div class="member-photo">
+                            <img src="mut.jpg" alt="MUTHUKUMARAN">
+                        </div>
+                        <div class="member-info">
+                            <h3>MUTHUKUMARAN</h3>
+                            <p class="role">Mech & Engine</p>
+                            <div class="social-links">
+                                <a href="#" class="instagram" onclick="showSocialModal('MUTHUKUMARAN', 'Mech & Engine', 'instagram')"><i class="fab fa-instagram"></i></a>
+                                <a href="#" class="linkedin" onclick="showSocialModal('MUTHUKUMARAN', 'Mech & Engine', 'linkedin')"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="team-card">
+                        <div class="member-photo">
+                            <img src="skty.jpg" alt="SAKTHIVEL">
+                        </div>
+                        <div class="member-info">
+                            <h3>SAKTHIVEL</h3>
+                            <p class="role">Mech & Engine</p>
+                            <div class="social-links">
+                                <a href="#" class="instagram" onclick="showSocialModal('SAKTHIVEL', 'Mech & Engine', 'instagram')"><i class="fab fa-instagram"></i></a>
+                                <a href="#" class="linkedin" onclick="showSocialModal('SAKTHIVEL', 'Mech & Engine', 'linkedin')"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Innovation Team Section -->
+            <div class="team-section">
+                <h2><i class="fas fa-lightbulb"></i>Innovation Team</h2>
+                <div class="team-grid">
+                    <div class="team-card">
+                        <div class="member-photo">
+                            <img src="kelavi.jpg" alt="HARITHRA">
+                        </div>
+                        <div class="member-info">
+                            <h3>HARITHRA</h3>
+                            <p class="role">Head Innovation</p>
+                            <div class="social-links">
+                                <a href="#" class="instagram" onclick="showSocialModal('HARITHRA', 'Innovation', 'instagram')"><i class="fab fa-instagram"></i></a>
+                                <a href="#" class="linkedin" onclick="showSocialModal('HARITHRA', 'Innovation', 'linkedin')"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="team-card">
+                        <div class="member-photo">
+                            <img src="sha.jpg" alt="SHARMA">
+                        </div>
+                        <div class="member-info">
+                            <h3>SHARMA</h3>
+                            <p class="role">Innovation</p>
+                            <div class="social-links">
+                                <a href="#" class="instagram" onclick="showSocialModal('SHARMA', 'Innovation', 'instagram')"><i class="fab fa-instagram"></i></a>
+                                <a href="#" class="linkedin" onclick="showSocialModal('SHARMA', 'Innovation', 'linkedin')"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Purchase Team Section -->
+            <div class="team-section">
+                <h2><i class="fas fa-shopping-cart"></i>Purchase Team</h2>
+                <div class="team-grid">
+                    <div class="team-card">
+                        <div class="member-photo">
+                            <img src="harsh.jpg" alt="HARSHAVARDAN">
+                        </div>
+                        <div class="member-info">
+                            <h3>HARSHAVARDAN</h3>
+                            <p class="role">Head Purchase</p>
+                            <div class="social-links">
+                                <a href="#" class="instagram" onclick="showSocialModal('HARSHAVARDAN', 'Purchase', 'instagram')"><i class="fab fa-instagram"></i></a>
+                                <a href="#" class="linkedin" onclick="showSocialModal('HARSHAVARDAN', 'Purchase', 'linkedin')"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- BMC & Reports Team Section -->
+            <div class="team-section">
+                <h2><i class="fas fa-file-alt"></i>BMC & Reports Team</h2>
+                <div class="team-grid">
+                    <div class="team-card">
+                        <div class="member-photo">
+                            <img src="anty.jpg" alt="VANI SHREE">
+                        </div>
+                        <div class="member-info">
+                            <h3>VANI SHREE</h3>
+                            <p class="role">BMC & Reports</p>
+                            <div class="social-links">
+                                <a href="#" class="instagram" onclick="showSocialModal('VANI SHREE', 'BMC & Reports', 'instagram')"><i class="fab fa-instagram"></i></a>
+                                <a href="#" class="linkedin" onclick="showSocialModal('VANI SHREE', 'BMC & Reports', 'linkedin')"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="team-card">
+                        <div class="member-photo">
+                            <img src="panda.jpg" alt="HASRUTHA">
+                        </div>
+                        <div class="member-info">
+                            <h3>HASRUTHA</h3>
+                            <p class="role">BMC & Reports</p>
+                            <div class="social-links">
+                                <a href="#" class="instagram" onclick="showSocialModal('HASRUTHA', 'BMC & Reports', 'instagram')"><i class="fab fa-instagram"></i></a>
+                                <a href="#" class="linkedin" onclick="showSocialModal('HASRUTHA', 'BMC & Reports', 'linkedin')"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Social Media Modal -->
+    <div id="socialModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h3 id="modalTitle"><i class="fab fa-instagram"></i> Add Instagram Info</h3>
+            <div id="modalContent">
+                <p id="memberInfo" style="margin-bottom: 1.5rem;"></p>
+                <input type="text" id="socialInput" class="modal-input" placeholder="Enter username or profile URL">
+                <button class="modal-btn" onclick="saveSocialInfo()">Save Information</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-about">
+                <div class="footer-logo">
+                    <i class="fas fa-bolt"></i> SysNitorS TNKC
+                </div>
+                <p>We are a passionate team of engineering students dedicated to pushing the boundaries of go-kart performance through innovation, teamwork, and technical excellence.</p>
+                <div class="footer-social">
+                    <a href="#" class="instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="linkedin"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="youtube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="https://akash14k19.github.io/SYG-Home/"><i class="fas fa-chevron-right"></i> Home</a></li>
+                    <li><a href="members.html"><i class="fas fa-chevron-right"></i> Members</a></li>
+                    <li><a href="gallery.html"><i class="fas fa-chevron-right"></i> Gallery</a></li>
+                    <li><a href="achievements.html"><i class="fas fa-chevron-right"></i> Achievements</a></li>
+                    <li><a href="info.html"><i class="fas fa-chevron-right"></i> Info</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>Contact Us</h4>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Department of Mechanical Engineering, TNKC College, Chennai</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <span>+91 98765 43210</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>team@sysnitros.tnkc.edu</span>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2025 SysNitorS TNKC Team. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navLinks.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+        
+        // Current member and social media being edited
+        let currentMember = null;
+        let currentSocialType = null;
+        
+        function showSocialModal(name, role, socialType) {
+            currentMember = name;
+            currentSocialType = socialType;
+            
+            const modal = document.getElementById('socialModal');
+            const title = document.getElementById('modalTitle');
+            const memberInfo = document.getElementById('memberInfo');
+            
+            // Update icon based on social type
+            const iconClass = socialType === 'instagram' ? 'fab fa-instagram' : 
+                            socialType === 'linkedin' ? 'fab fa-linkedin-in' : 
+                            socialType === 'twitter' ? 'fab fa-twitter' : 'fas fa-share-alt';
+            
+            title.innerHTML = `<i class="${iconClass}"></i> Add ${socialType.charAt(0).toUpperCase() + socialType.slice(1)} Info`;
+            memberInfo.innerHTML = `<strong>${name}</strong><br><span style="color: var(--primary-light)">${role}</span>`;
+            
+            // Clear previous input
+            document.getElementById('socialInput').value = '';
+            
+            // Set placeholder based on social type
+            const placeholder = socialType === 'instagram' ? 'Enter Instagram username' :
+                              socialType === 'linkedin' ? 'Enter LinkedIn profile URL' :
+                              socialType === 'twitter' ? 'Enter Twitter handle' : 'Enter profile info';
+            document.getElementById('socialInput').placeholder = placeholder;
+            
+            modal.style.display = 'block';
+        }
+        
+        function closeModal() {
+            document.getElementById('socialModal').style.display = 'none';
+        }
+        
+        function saveSocialInfo() {
+            const input = document.getElementById('socialInput').value.trim();
+            if (input) {
+                // Here you would typically save this to a database
+                // For now, we'll just show a styled alert
+                const alertMsg = document.createElement('div');
+                alertMsg.style.position = 'fixed';
+                alertMsg.style.bottom = '20px';
+                alertMsg.style.right = '20px';
+                alertMsg.style.padding = '15px 20px';
+                alertMsg.style.background = 'var(--primary)';
+                alertMsg.style.color = 'white';
+                alertMsg.style.borderRadius = '6px';
+                alertMsg.style.boxShadow = '0 4px 15px rgba(0,0,0,0.2)';
+                alertMsg.style.zIndex = '1000';
+                alertMsg.style.animation = 'fadeIn 0.3s ease';
+                alertMsg.innerHTML = `<i class="fas fa-check-circle"></i> ${currentMember}'s ${currentSocialType} info saved!`;
+                
+                document.body.appendChild(alertMsg);
+                
+                // Remove alert after 3 seconds
+                setTimeout(() => {
+                    alertMsg.style.animation = 'fadeOut 0.3s ease';
+                    setTimeout(() => {
+                        document.body.removeChild(alertMsg);
+                    }, 300);
+                }, 3000);
+                
+                closeModal();
+            } else {
+                // Show error style
+                const inputField = document.getElementById('socialInput');
+                inputField.style.borderColor = 'var(--danger)';
+                inputField.style.boxShadow = '0 0 0 3px rgba(244, 67, 54, 0.2)';
+                
+                setTimeout(() => {
+                    inputField.style.borderColor = 'rgba(255, 0, 0, 0.3)';
+                    inputField.style.boxShadow = 'none';
+                }, 2000);
+            }
+        }
+        
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('socialModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+        
+        // Add shadow to navbar on scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('.main-nav');
+            if (window.scrollY > 20) {
+                nav.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.3)';
+                nav.style.background = 'rgba(0, 0, 0, 0.95)';
+            } else {
+                nav.style.boxShadow = 'none';
+                nav.style.background = 'rgba(0, 0, 0, 0.8)';
+            }
+        });
+    </script>
+</body>
+</html>
